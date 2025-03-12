@@ -12,11 +12,11 @@ _so that I can_ **[achieve a goal or benefit]**.
 **When** [an action is performed],  
 **Then** [an expected outcome should occur].  
 
-### Checklist:
+### To-DO:
 
-- [ ] Criteria 1  
-- [ ] Criteria 2  
-- [ ] Criteria 3  
+- [ ] Task 1  
+- [ ] Task 2  
+- [ ] Task 3  
 
 ## Motivation & Benefits
 
