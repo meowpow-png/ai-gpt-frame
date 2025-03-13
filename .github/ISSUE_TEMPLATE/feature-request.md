@@ -1,10 +1,4 @@
----
-name: "Feature Request"
-about: "Propose a new feature or enhancement"
-title: "[Feature]: <Brief description>"
-labels: ["feature"]
-assignees: []
----
+# 🚀 Feature Request
 
 ## Feature Overview
 
@@ -37,7 +31,7 @@ List key tasks required to implement this feature:
 - Provide an example of a limitation or challenge without this feature.  
 - How will this benefit users in both the short and long term?  
 
-## Screenshots
+## Screenshots _(if applicable)_
 
 <!-- Add relevant images -->
 
