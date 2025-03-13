@@ -1,3 +1,11 @@
+---
+name: Feature Request
+about: Add new or expand existing feature
+title: "[Feature]: "
+labels: feature
+assignees: ''
+---
+
 # Feature Request
 
 ## User Story
