@@ -6,7 +6,9 @@ labels: ["feature"]
 assignees: []
 ---
 
-# Feature Request
+## Feature Overview
+
+Provide a brief summary of the feature being added or expanded.
 
 ## User Story
 
@@ -16,29 +18,34 @@ _so that I can_ **[achieve a goal or benefit]**.
 
 ## Acceptance Criteria
 
-**Given** [a specific scenario],  
-**When** [an action is performed],  
-**Then** [an expected outcome should occur].  
+- **Given** [a specific scenario],  
+- **When** [an action is performed],  
+- **Then** [an expected outcome should occur].  
 
-### To-Do:
+## Implementation Steps
 
-- [ ] Task 1  
-- [ ] Task 2  
-- [ ] Task 3  
+List key tasks required to implement this feature:
+
+- [ ] Task 1 (e.g., Write AI instructions)  
+- [ ] Task 2 (e.g., Write feature documentation)  
+- [ ] Task 3 (e.g., Write CI tests)  
 
 ## Motivation & Benefits
 
 - Why is this feature needed?  
-- How will it improve the user experience or functionality?  
+- What problem does it solve?  
+- Provide an example of a limitation or challenge without this feature.  
+- How will this benefit users in both the short and long term?  
 
-##  Screenshots
+## Screenshots
 
 <!-- Add relevant images -->
 
 ## Dependencies & Related Issues
 
-- Are there any related issues or dependencies?  
-- Does it require backend/frontend/API changes?  
+- Does this depend on other issues/features?  
+- Are there backend/frontend/API changes required?  
+- Related GitHub issues: #IssueNumber (if applicable)  
 
 ## Additional Notes
 
