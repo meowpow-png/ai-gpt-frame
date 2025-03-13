@@ -1,9 +1,9 @@
 ---
-name: Feature Request
-about: Add new or expand existing feature
-title: "[Feature]: "
-labels: feature
-assignees: ''
+name: "Feature Request"
+about: "Propose a new feature or enhancement"
+title: "[Feature]: <Brief description>"
+labels: ["feature"]
+assignees: []
 ---
 
 # Feature Request
