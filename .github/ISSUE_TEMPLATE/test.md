@@ -1,3 +1,12 @@
+---
+name: "Test Update"
+about: "Propose test additions, improvements, or fixes"
+title: "[Test]: <Brief description>"
+labels: ["test"]
+assignees: []
+
+---
+
 # 🧪 Test Update
 
 ## Test Overview

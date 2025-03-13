@@ -1,3 +1,12 @@
+---
+name: "Optimization Request"
+about: "Propose performance, maintainability, or efficiency improvements"
+title: "[Optimization]: <Brief description>"
+labels: ["optimization"]
+assignees: []
+
+---
+
 # ⚡ Optimization Request
 
 ## Optimization Overview

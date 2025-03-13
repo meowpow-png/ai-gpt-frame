@@ -1,3 +1,12 @@
+---
+name: "Bug Report"
+about: "Report an error or unexpected behavior"
+title: "[Bug]: <Brief description>"
+labels: ["bug"]
+assignees: []
+
+---
+
 # 🐛 Bug Report
 
 ## Bug Description

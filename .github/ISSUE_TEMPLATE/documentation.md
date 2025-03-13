@@ -1,3 +1,12 @@
+---
+name: "Documentation Update"
+about: "Request changes, additions, or fixes to documentation"
+title: "[Docs]: <Brief description>"
+labels: ["documentation"]
+assignees: []
+
+---
+
 # 📖 Documentation Update
 
 ## Documentation Overview
