@@ -12,7 +12,7 @@ _so that I can_ **[achieve a goal or benefit]**.
 **When** [an action is performed],  
 **Then** [an expected outcome should occur].  
 
-### To-DO:
+### To-Do:
 
 - [ ] Task 1  
 - [ ] Task 2  
