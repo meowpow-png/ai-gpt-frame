@@ -1,0 +1,128 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
+}
+h2 {
+    text-align: center;
+}
+
+/* Chat Container */
+#chat-container {
+    background: var(--chat-bg);
+    padding: 15px;
+    border-radius: 8px;
+    height: 400px;
+    overflow-y: auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat Bubbles */
+.message {
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    max-width: 80%;
+}
+.user {
+    background: var(--user-bg);
+    color: white;
+    align-self: flex-end;
+    text-align: right;
+}
+.bot {
+    background: var(--bot-bg);
+    color: var(--text-color);
+    align-self: flex-start;
+}
+
+/* Input and Button */
+#input-container {
+    display: flex;
+    margin-top: 10px;
+}
+textarea {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: none;
+    background: var(--input-bg);
+    color: var(--text-color);
+}
+button {
+    padding: 10px 15px;
+    margin-left: 10px;
+    border: none;
+    background: #28a745;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Light & Dark Mode Variables */
+:root {
+    --bg-color: #121212;
+    --text-color: #f4f4f4;
+    --chat-bg: #1e1e1e;
+    --user-bg: #007bff;
+    --bot-bg: #333;
+    --input-bg: #222;
+}
+.light-mode {
+    --bg-color: #f4f4f4;
+    --text-color: #000;
+    --chat-bg: #fff;
+    --user-bg: #007bff;
+    --bot-bg: #e9ecef;
+    --input-bg: #fff;
+}
+
+/* Toggle Switch */
+.toggle-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.toggle {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.toggle input {
+    display: none;
+}
+.toggle-label {
+    width: 40px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 50px;
+    position: relative;
+    transition: background 0.3s;
+}
+.toggle-label::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    top: 1px;
+    left: 2px;
+    transition: transform 0.3s;
+}
+input:checked + .toggle-label {
+    background: #28a745;
+}
+input:checked + .toggle-label::before {
+    transform: translateX(18px);
+}
