@@ -52,8 +52,19 @@ public class ChatController {
                 .build();
 
         try (Response response = client.newCall(httpRequest).execute()) {
+            String jsonResponse = response.body().string();
+
+            // Extract only the AI message
+            String botReply = new com.fasterxml.jackson.databind.ObjectMapper()
+                    .readTree(jsonResponse)
+                    .path("choices")
+                    .get(0)
+                    .path("message")
+                    .path("content")
+                    .asText();
+
             ChatResponse chatResponse = new ChatResponse();
-            chatResponse.response = response.body().string();
+            chatResponse.response = botReply;
             return chatResponse;
         }
     }
