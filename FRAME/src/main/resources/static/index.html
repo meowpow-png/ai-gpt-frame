@@ -10,13 +10,15 @@
             max-width: 600px;
             margin: auto;
             padding: 20px;
-            background-color: #f4f4f4;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background 0.3s, color 0.3s;
         }
         h2 {
             text-align: center;
         }
         #chat-container {
-            background: white;
+            background: var(--chat-bg);
             padding: 15px;
             border-radius: 8px;
             height: 400px;
@@ -30,14 +32,14 @@
             max-width: 80%;
         }
         .user {
-            background: #007bff;
+            background: var(--user-bg);
             color: white;
             align-self: flex-end;
             text-align: right;
         }
         .bot {
-            background: #e9ecef;
-            color: black;
+            background: var(--bot-bg);
+            color: var(--text-color);
             align-self: flex-start;
         }
         #input-container {
@@ -50,6 +52,8 @@
             border-radius: 5px;
             border: 1px solid #ccc;
             resize: none;
+            background: var(--input-bg);
+            color: var(--text-color);
         }
         button {
             padding: 10px 15px;
@@ -64,10 +68,76 @@
             background: #ccc;
             cursor: not-allowed;
         }
+
+        /* Light & Dark Mode Variables */
+        :root {
+            --bg-color: #121212;
+            --text-color: #f4f4f4;
+            --chat-bg: #1e1e1e;
+            --user-bg: #007bff;
+            --bot-bg: #333;
+            --input-bg: #222;
+        }
+        .light-mode {
+            --bg-color: #f4f4f4;
+            --text-color: #000;
+            --chat-bg: #fff;
+            --user-bg: #007bff;
+            --bot-bg: #e9ecef;
+            --input-bg: #fff;
+        }
+
+
+        /* Toggle Switch */
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .toggle {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .toggle input {
+            display: none;
+        }
+        .toggle-label {
+            width: 40px;
+            height: 20px;
+            background: #ccc;
+            border-radius: 50px;
+            position: relative;
+            transition: background 0.3s;
+        }
+        .toggle-label::before {
+            content: "";
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 1px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+        input:checked + .toggle-label {
+            background: #28a745;
+        }
+        input:checked + .toggle-label::before {
+            transform: translateX(18px);
+        }
     </style>
 </head>
 <body>
 <h2>Chat with AI</h2>
+<div class="toggle-container">
+    <label class="toggle">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="toggle-label"></span>
+        <span style="margin-left: 10px;">Dark Mode</span>
+    </label>
+</div>
 <div id="chat-container"></div>
 <div id="input-container">
     <textarea id="message" placeholder="Type your message..." rows="2"></textarea>
@@ -124,6 +194,24 @@
         if (event.key === "Enter" && !event.shiftKey) {
             event.preventDefault();
             sendMessage();
+        }
+    });
+</script>
+<script>
+    // Load Dark Mode Preference
+    if (localStorage.getItem("darkMode") !== "disabled") {
+        document.body.classList.add("dark-mode");
+        darkModeToggle.checked = true;
+    }
+
+    // Toggle Mode and Save Preference
+    darkModeToggle.addEventListener("change", () => {
+        if (darkModeToggle.checked) {
+            document.body.classList.add("dark-mode");
+            localStorage.setItem("darkMode", "enabled");
+        } else {
+            document.body.classList.remove("dark-mode");
+            localStorage.setItem("darkMode", "disabled");
         }
     });
 </script>
