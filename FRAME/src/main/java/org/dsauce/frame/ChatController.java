@@ -35,12 +35,22 @@ public class ChatController {
         OkHttpClient client = new OkHttpClient();
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
 
-        String jsonBody = """
-            {
-                "model": "gpt-3.5-turbo",
-                "messages": [{"role": "user", "content": "%s"}]
-            }
-            """.formatted(request.message);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Create root JSON object
+        ObjectNode jsonRoot = objectMapper.createObjectNode();
+        jsonRoot.put("model", "gpt-3.5-turbo");
+
+        // Create messages array
+        ArrayNode messagesArray = objectMapper.createArrayNode();
+        messagesArray.add(objectMapper.createObjectNode().put("role", "system").put("content", aiInstructions));
+        messagesArray.add(objectMapper.createObjectNode().put("role", "user").put("content", request.message));
+
+        // Attach messages array to root
+        jsonRoot.set("messages", messagesArray);
+
+        // Convert object to JSON string
+        String jsonBody = objectMapper.writeValueAsString(jsonRoot);
 
         RequestBody requestBody = RequestBody.create(jsonBody, mediaType);
 
