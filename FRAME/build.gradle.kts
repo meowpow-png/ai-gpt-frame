@@ -11,6 +11,10 @@ repositories {
     mavenCentral()
 }
 
+tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
+    mainClass.set("org.dsauce.frame.api.ChatGptApiApplication")
+}
+
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
