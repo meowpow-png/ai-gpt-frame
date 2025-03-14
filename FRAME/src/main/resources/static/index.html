@@ -3,25 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatGPT Web UI</title>
+    <title>ChatGPT Web Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            text-align: center;
+        }
+        #chat-container {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            height: 400px;
+            overflow-y: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .message {
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+        .user {
+            background: #007bff;
+            color: white;
+            align-self: flex-end;
+            text-align: right;
+        }
+        .bot {
+            background: #e9ecef;
+            color: black;
+            align-self: flex-start;
+        }
+        #input-container {
+            display: flex;
+            margin-top: 10px;
+        }
+        textarea {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+        }
+        button {
+            padding: 10px 15px;
+            margin-left: 10px;
+            border: none;
+            background: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
 <h2>Chat with AI</h2>
-<textarea id="message" placeholder="Type your message..."></textarea>
-<button onclick="sendMessage()">Send</button>
-<p><strong>Response:</strong> <span id="response"></span></p>
+<div id="chat-container"></div>
+<div id="input-container">
+    <textarea id="message" placeholder="Type your message..." rows="2"></textarea>
+    <button id="send-btn" onclick="sendMessage()">Send</button>
+</div>
 
 <script>
     async function sendMessage() {
-        const message = document.getElementById('message').value;
-        const response = await fetch('/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: message })
-        });
-        const data = await response.json();
-        document.getElementById('response').innerText = data.response;
+        const messageInput = document.getElementById("message");
+        const chatContainer = document.getElementById("chat-container");
+        const sendButton = document.getElementById("send-btn");
+
+        const userMessage = messageInput.value.trim();
+        if (userMessage === "") return;
+
+        // Disable button while waiting
+        sendButton.disabled = true;
+
+        // Add user message to chat
+        chatContainer.innerHTML += `<div class="message user">${userMessage}</div>`;
+        messageInput.value = "";
+        chatContainer.scrollTop = chatContainer.scrollHeight; // Auto-scroll
+
+        // Show typing indicator
+        chatContainer.innerHTML += `<div class="message bot" id="loading">Thinking...</div>`;
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        try {
+            const response = await fetch("/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userMessage })
+            });
+            const data = await response.json();
+
+            // Remove typing indicator
+            document.getElementById("loading").remove();
+
+            // Display bot response
+            chatContainer.innerHTML += `<div class="message bot">${data.response}</div>`;
+        } catch (error) {
+            // Handle errors
+            console.error("Error:", error);
+            document.getElementById("loading").innerText = "Error: Unable to fetch response.";
+        }
+
+        // Re-enable button
+        sendButton.disabled = false;
+        chatContainer.scrollTop = chatContainer.scrollHeight;
     }
+
+    // Press Enter to send message
+    document.getElementById("message").addEventListener("keypress", function (event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            sendMessage();
+        }
+    });
 </script>
 </body>
 </html>
