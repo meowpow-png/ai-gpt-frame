@@ -42,7 +42,7 @@ public class ChatController {
 
         // Create root JSON object
         ObjectNode jsonRoot = objectMapper.createObjectNode();
-        jsonRoot.put("model", "gpt-3.5-turbo");
+        jsonRoot.put("model", "gpt-4o-2024-08-06");
 
         // Create messages array
         ArrayNode messagesArray = objectMapper.createArrayNode();
