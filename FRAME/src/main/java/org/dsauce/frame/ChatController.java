@@ -14,6 +14,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/chat")
@@ -22,7 +31,30 @@ public class ChatController {
     @Value("${openai.api.key}")
     private String openaiApiKey;
 
+    private static final String INSTRUCTIONS_DIR_PATH = Paths.get("../instructions").toAbsolutePath().toString();
     private static final String OPENAI_URL = "https://api.openai.com/v1/chat/completions";
+    private final String AI_INSTRUCTIONS;
+
+    public ChatController() {
+        // Load all AI instructions from directory
+        ArrayList<String> instructions = new ArrayList<>();
+        try (Stream<Path> files = Files.list(Paths.get(INSTRUCTIONS_DIR_PATH))) {
+            instructions = files
+                    .filter(Files::isRegularFile)
+                    .map(path -> {
+                        try {
+                            return Files.readString(path, StandardCharsets.UTF_8);
+                        } catch (IOException e) {
+                            throw new RuntimeException("Error reading file: " + path, e);
+                        }
+                    })
+                    .collect(Collectors.toCollection(ArrayList::new));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        // Combine all AI instructions into a single String
+        AI_INSTRUCTIONS = String.join("\n\n", instructions);
+    }
 
     static class ChatRequest {
         public String message;
@@ -46,7 +78,7 @@ public class ChatController {
 
         // Create messages array
         ArrayNode messagesArray = objectMapper.createArrayNode();
-        messagesArray.add(objectMapper.createObjectNode().put("role", "system").put("content", aiInstructions));
+        messagesArray.add(objectMapper.createObjectNode().put("role", "system").put("content", AI_INSTRUCTIONS));
         messagesArray.add(objectMapper.createObjectNode().put("role", "user").put("content", request.message));
 
         // Attach messages array to root
