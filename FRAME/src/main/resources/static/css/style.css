@@ -1,4 +1,12 @@
 /* General Styling */
+:root {
+    --bg-color: #121212;
+    --text-color: #f4f4f4;
+    --chat-bg: #1e1e1e;
+    --user-bg: #007bff;
+    --bot-bg: #333;
+    --input-bg: #222;
+}
 body {
     font-family: Arial, sans-serif;
     max-width: 600px;
@@ -76,24 +84,10 @@ button:disabled {
 }
 
 /* Light & Dark Mode Variables */
-:root {
-    --bg-color: #121212;
-    --text-color: #f4f4f4;
-    --chat-bg: #1e1e1e;
-    --user-bg: #007bff;
-    --bot-bg: #333;
-    --input-bg: #222;
+.dark-mode {
+    background-color: #121212;
+    color: white;
 }
-.light-mode {
-    --bg-color: #f4f4f4;
-    --text-color: #000;
-    --chat-bg: #fff;
-    --user-bg: #007bff;
-    --bot-bg: #e9ecef;
-    --input-bg: #fff;
-}
-
-/* Toggle Switch */
 .toggle-container {
     display: flex;
     justify-content: center;

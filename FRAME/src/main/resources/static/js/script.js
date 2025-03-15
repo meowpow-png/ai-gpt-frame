@@ -35,17 +35,46 @@ async function sendMessage() {
 }
 
 // Dark mode handling
-const darkModeToggle = document.getElementById("darkModeToggle");
-if (localStorage.getItem("darkMode") !== "disabled") {
-    document.body.classList.add("dark-mode");
-    darkModeToggle.checked = true;
-}
-darkModeToggle.addEventListener("change", () => {
-    if (darkModeToggle.checked) {
-        document.body.classList.add("dark-mode");
+document.addEventListener("DOMContentLoaded", function () {
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    const root = document.documentElement; // Access :root
+
+    function enableDarkMode() {
+        root.style.setProperty("--bg-color", "#121212");
+        root.style.setProperty("--text-color", "#f4f4f4");
+        root.style.setProperty("--chat-bg", "#1e1e1e");
+        root.style.setProperty("--user-bg", "#007bff");
+        root.style.setProperty("--bot-bg", "#333");
+        root.style.setProperty("--input-bg", "#222");
         localStorage.setItem("darkMode", "enabled");
-    } else {
-        document.body.classList.remove("dark-mode");
+    }
+
+    function disableDarkMode() {
+        root.style.setProperty("--bg-color", "#ffffff");
+        root.style.setProperty("--text-color", "#000000");
+        root.style.setProperty("--chat-bg", "#f4f4f4");
+        root.style.setProperty("--user-bg", "#007bff");
+        root.style.setProperty("--bot-bg", "#ddd");
+        root.style.setProperty("--input-bg", "#eee");
         localStorage.setItem("darkMode", "disabled");
     }
+
+    // Apply saved mode on load
+    if (localStorage.getItem("darkMode") === "enabled") {
+        enableDarkMode();
+        darkModeToggle.checked = true;
+    } else {
+        disableDarkMode();
+        darkModeToggle.checked = false;
+    }
+
+    // Toggle mode on change
+    darkModeToggle.addEventListener("change", () => {
+        if (darkModeToggle.checked) {
+            enableDarkMode();
+        } else {
+            disableDarkMode();
+        }
+    });
 });
+
