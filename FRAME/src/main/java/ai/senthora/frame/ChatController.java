@@ -1,4 +1,4 @@
-package org.dsauce.frame;
+package ai.senthora.frame;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
