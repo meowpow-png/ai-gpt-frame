@@ -4,7 +4,7 @@ plugins {
     id("java")
 }
 
-group = "org.dsauce"
+group = "ai.senthora"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -12,7 +12,7 @@ repositories {
 }
 
 tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
-    mainClass.set("org.dsauce.frame.FrameAIApplication")
+    mainClass.set("ai.senthora.frame.FrameAIApplication")
 }
 
 dependencies {
