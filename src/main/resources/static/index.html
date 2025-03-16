@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Web Chat</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<h2>Chat with FRAME</h2>
+<div class="toggle-container">
+    <label class="toggle">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="toggle-label"></span>
+        <span style="margin-left: 10px;">Dark Mode</span>
+    </label>
+</div>
+<div id="chat-container"></div>
+<div id="input-container">
+    <textarea id="message" placeholder="Type your message..." rows="2"></textarea>
+    <button id="send-btn" onclick="sendMessage()">Send</button>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
