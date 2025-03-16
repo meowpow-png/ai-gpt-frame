@@ -31,15 +31,23 @@ public class ChatController {
     @Value("${openai.api.key}")
     private String openaiApiKey;
 
-    private static final String INSTRUCTIONS_DIR_PATH = Paths.get("../instructions").toAbsolutePath().toString();
+    private static final Path INSTRUCTIONS_DIR_PATH = Paths.get("instructions");
     private static final String OPENAI_URL = "https://api.openai.com/v1/chat/completions";
     private final String AI_INSTRUCTIONS;
+    {
+        AI_INSTRUCTIONS = String.join("\n\n", readInstructions(INSTRUCTIONS_DIR_PATH));
+    }
+    static class ChatRequest {
+        public String message;
+    }
 
-    public ChatController() {
-        // Load all AI instructions from directory
-        ArrayList<String> instructions = new ArrayList<>();
-        try (Stream<Path> files = Files.list(Paths.get(INSTRUCTIONS_DIR_PATH))) {
-            instructions = files
+    static class ChatResponse {
+        public String response;
+    }
+
+    public static ArrayList<String> readInstructions(Path dir) {
+        try (Stream<Path> files = Files.list(dir)) {
+            return files
                     .filter(Files::isRegularFile)
                     .map(path -> {
                         try {
@@ -52,16 +60,6 @@ public class ChatController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        // Combine all AI instructions into a single String
-        AI_INSTRUCTIONS = String.join("\n\n", instructions);
-    }
-
-    static class ChatRequest {
-        public String message;
-    }
-
-    static class ChatResponse {
-        public String response;
     }
 
     @PostMapping
