@@ -17,6 +17,17 @@ node {
     npmVersion.set("9.5.0")
     download.set(true)
 }
+tasks.register<Exec>("dockerBuildFrontend") {
+    dependsOn("installFrontend")
+    workingDir = file("${project.projectDir}/frontend")
+    commandLine("docker", "build", "-t", "react-frontend", ".")
+}
+
+tasks.register<Exec>("dockerRunFrontend") {
+    dependsOn("dockerBuildFrontend")
+    commandLine("docker", "run", "-p", "5173:5173", "react-frontend")
+}
+
 tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
     mainClass.set("ai.senthora.frame.FrameAIApplication")
 }
