@@ -1,6 +1,7 @@
 plugins {
     id("org.springframework.boot") version "3.2.2"
     id("io.spring.dependency-management") version "1.1.4"
+    id("com.github.node-gradle.node") version "3.5.1"
     id("java")
 }
 
@@ -11,6 +12,11 @@ repositories {
     mavenCentral()
 }
 
+node {
+    version.set("22.0.0")
+    npmVersion.set("9.5.0")
+    download.set(true)
+}
 tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
     mainClass.set("ai.senthora.frame.FrameAIApplication")
 }
