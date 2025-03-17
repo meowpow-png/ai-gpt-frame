@@ -1,14 +1,19 @@
-import { useEffect } from 'react';
-import api from './api';
+import { useEffect, useState } from "react";
+import api from "./api"; // Axios instance
 
 function App() {
-  useEffect(() => {
-    api.get('/api/test') // Adjust path to your backend endpoint
-      .then(response => console.log(response.data))
-      .catch(error => console.error('API error:', error));
-  }, []);
+  const [message, setMessage] = useState("Loading...");
 
-  return <div>Hello from React!</div>;
+   useEffect(() => {
+     api.get("/test")
+       .then(response => setMessage(response.data))
+       .catch(error => {
+         console.error("API error:", error);
+         setMessage("Error fetching data");
+       });
+   }, []);
+
+  return <div>{message}</div>;
 }
 
 export default App;

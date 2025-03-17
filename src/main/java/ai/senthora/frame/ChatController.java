@@ -25,7 +25,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
-@RequestMapping("/chat")
+@RequestMapping("/api")
+@CrossOrigin(origins = "*") // Allow requests from frontend
 public class ChatController {
 
     @Value("${openai.api.key}")
@@ -60,6 +61,11 @@ public class ChatController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @GetMapping("/test")
+    public String testEndpoint() {
+        return "Hello from React!";
     }
 
     @PostMapping
