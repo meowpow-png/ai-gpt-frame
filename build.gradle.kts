@@ -25,7 +25,15 @@ tasks.register<Exec>("dockerBuildFrontend") {
 
 tasks.register<Exec>("dockerRunFrontend") {
     dependsOn("dockerBuildFrontend")
-    commandLine("docker", "run", "-p", "5173:5173", "react-frontend")
+    commandLine(
+        "docker", "run",
+        "-p", "5173:5173",         // Map Vite port for external access
+        "-v", "${projectDir}/frontend:/app",  // Mount frontend directory
+        "-w", "/app",              // Set working directory inside container
+        "--rm",                    // Auto-remove container on exit
+        "node:18-alpine",          // Use a lightweight Node.js image
+        "sh", "-c", "npm install && npm run dev:docker"
+    )
 }
 
 tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {

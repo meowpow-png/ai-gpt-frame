@@ -12,6 +12,14 @@ RUN npm install
 
 # Copy the rest of the project
 COPY . .
+
+# Build Tailwind CSS (ensure Tailwind is installed)
+RUN npx tailwindcss -o ./src/output.css
+
+#RUN npm run build
+
+# Expose the port for Vite
 EXPOSE 5173
-CMD ["npm", "run", "dev"]
-CMD ["npm", "run", "dev", "--", "--host"]
+
+# Start Vite development server with Tailwind watching for changes
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
