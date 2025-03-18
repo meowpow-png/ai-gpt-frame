@@ -63,11 +63,6 @@ public class ChatController {
         }
     }
 
-    @GetMapping("/test")
-    public String testEndpoint() {
-        return "Hello from React!";
-    }
-
     @PostMapping
     public ChatResponse chat(@org.springframework.web.bind.annotation.RequestBody ChatRequest request) throws IOException {
 
