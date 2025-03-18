@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/chat")
 @CrossOrigin(origins = "*") // Allow requests from frontend
 public class ChatController {
 
