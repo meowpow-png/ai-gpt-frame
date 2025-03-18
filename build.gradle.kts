@@ -17,6 +17,18 @@ node {
     npmVersion.set("9.5.0")
     download.set(true)
 }
+
+tasks.register<com.github.gradle.node.npm.task.NpmTask>("installFrontend") {
+    workingDir.set(file("${project.projectDir}/frontend"))
+    args.set(listOf("install"))
+}
+
+tasks.register<com.github.gradle.node.npm.task.NpmTask>("startFrontend") {
+    dependsOn("installFrontend")
+    workingDir.set(file("${project.projectDir}/frontend"))
+    args.set(listOf("run", "dev"))
+}
+
 tasks.register<Exec>("dockerBuildFrontend") {
     dependsOn("installFrontend")
     workingDir = file("${project.projectDir}/frontend")
