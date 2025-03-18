@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ChatApp from "./components/ChatApp";
 import api from "./api"; // Axios instance
 
 function App() {
@@ -13,7 +14,11 @@ function App() {
        });
    }, []);
 
-  return <div>{message}</div>;
+  return (
+    <div className="h-screen flex items-center justify-center bg-gray-900">
+      <ChatApp />
+    </div>
+  );
 }
 
 export default App;
