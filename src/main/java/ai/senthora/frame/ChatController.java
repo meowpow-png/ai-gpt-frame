@@ -25,7 +25,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
-@RequestMapping("/chat")
+@RequestMapping("/api/chat")
+@CrossOrigin(origins = "*") // Allow requests from frontend
 public class ChatController {
 
     @Value("${openai.api.key}")
